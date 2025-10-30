@@ -1,0 +1,780 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Estén con Jiménez - Delicias gastronómicas</title>
+    <style>
+        /* Estilos CSS3 */
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #f1faee;
+            --accent-color: #a8dadc;
+            --dark-color: #1d3557;
+            --light-color: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .slogan {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        nav {
+            background-color: var(--dark-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu li {
+            margin-left: 1.5rem;
+        }
+        
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            margin: 0 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .hero-btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+        
+        .hero-btns {
+            margin-top: 2rem;
+        }
+        
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .product-price span {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+        
+        .add-to-cart {
+            display: inline-block;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .service-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .discount-banner {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 4rem;
+        }
+        
+        .discount-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .discount-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .discount-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .discount-btn:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--dark-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Efectos de menú móvil */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .menu {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+            
+            .menu.active {
+                display: flex;
+            }
+            
+            .menu li {
+                margin: 0;
+                margin-top: 1rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            header {
+                height: auto;
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="inicio">
+        <div class="logo">Los Estén con Jiménez</div>
+        <div class="slogan">Sabores que enamoran, servicio que cautiva</div>
+        <div class="hero-btns">
+            <a href="#menu" class="hero-btn">Ver Menú</a>
+            <a href="#contacto" class="hero-btn" style="background-color: transparent; color: white;">Reservar</a>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="menu-toggle">☰</div>
+            <ul class="menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#descuentos">Descuentos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li>
+                    <a href="#" class="cart-icon">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="nosotros">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>En "Los Estén con Jiménez" llevamos más de 15 años deleitando paladares con nuestras creaciones culinarias. Fundada por la familia Jiménez, nuestra empresa nació del amor por la buena comida y el deseo de compartir sabores auténticos.</p>
+                <p>Nuestro secreto está en la selección cuidadosa de ingredientes frescos, las recetas tradicionales transmitidas por generaciones y la pasión que ponemos en cada plato que preparamos.</p>
+                <p>Hoy seguimos comprometidos con nuestra misión: ofrecer experiencias gastronómicas memorables que unan a las personas alrededor de la buena mesa.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipo de Los Estén con Jiménez">
+            </div>
+        </div>
+    </section>
+    
+    <section id="menu">
+        <h2 class="section-title">Nuestro Menú</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bandeja Paisa">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bandeja Paisa</h3>
+                    <span class="product-price">$25.000 <span>$28.000</span></span>
+                    <p>Deliciosa bandeja paisa tradicional con todos sus ingredientes: carne, chicharrón, frijoles, arroz, plátano, aguacate y arepa.</p>
+                    <a href="#" class="add-to-cart">Añadir al carrito</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ensalada Gourmet">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Ensalada Gourmet</h3>
+                    <span class="product-price">$18.000 <span>$20.000</span></span>
+                    <p>Ensalada fresca con pollo a la parrilla, queso de cabra, nueces, arándanos y aderezo de miel y mostaza.</p>
+                    <a href="#" class="add-to-cart">Añadir al carrito</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pasta Alfredo">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Pasta Alfredo</h3>
+                    <span class="product-price">$22.000</span>
+                    <p>Pasta fetuccini con nuestra exquisita salsa alfredo casera, champiñones y trozos de pollo.</p>
+                    <a href="#" class="add-to-cart">Añadir al carrito</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hamburguesa Artesanal">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Hamburguesa Artesanal</h3>
+                    <span class="product-price">$20.000 <span>$23.000</span></span>
+                    <p>Hamburguesa de carne 100% res con queso cheddar, tocino, cebolla caramelizada y nuestra salsa especial.</p>
+                    <a href="#" class="add-to-cart">Añadir al carrito</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sushi Variado">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Sushi Variado</h3>
+                    <span class="product-price">$28.000</span>
+                    <p>Combinación de 20 piezas de sushi: nigiri, maki y uramaki con los más frescos ingredientes.</p>
+                    <a href="#" class="add-to-cart">Añadir al carrito</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Postre de Chocolate">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Postre de Chocolate</h3>
+                    <span class="product-price">$12.000 <span>$15.000</span></span>
+                    <p>Delicioso volcán de chocolate con corazón líquido, acompañado de helado de vainilla.</p>
+                    <a href="#" class="add-to-cart">Añadir al carrito</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="servicios">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="services-list">
+            <div class="service-card">
+                <div class="service-icon">🍽️</div>
+                <h3 class="service-title">Restaurante</h3>
+                <p>Disfruta de nuestro acogedor restaurante con ambiente familiar y atención personalizada. Reserva tu mesa y vive una experiencia gastronómica única.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🚚</div>
+                <h3 class="service-title">Domicilios</h3>
+                <p>Pide tus platos favoritos desde la comodidad de tu hogar. Entregamos en toda la ciudad en un máximo de 45 minutos.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🎉</div>
+                <h3 class="service-title">Eventos Especiales</h3>
+                <p>Catering para todo tipo de eventos: matrimonios, cumpleaños, reuniones empresariales. Personalizamos menús según tus necesidades.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">👨‍🍳</div>
+                <h3 class="service-title">Clases de Cocina</h3>
+                <p>Aprende los secretos de nuestra cocina con talleres dictados por nuestros chefs. Ideal para grupos y empresas.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="descuentos">
+        <div class="discount-banner">
+            <h2 class="discount-title">¡Descuentos Especiales!</h2>
+            <p class="discount-text">Este mes celebramos nuestro aniversario con increíbles descuentos. Lleva 3 platos y paga solo 2, o disfruta de un 20% de descuento en pedidos superiores a $50.000.</p>
+            <a href="#" class="discount-btn">Ver Promociones</a>
+        </div>
+    </section>
+    
+    <section id="contacto">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <p><strong>Dirección:</strong> Calle 123 #45-67, Barrio El Poblado, Medellín</p>
+                <p><strong>Teléfono:</strong> (604) 123 4567</p>
+                <p><strong>Celular:</strong> 313 747 7897</p>
+                <p><strong>Email:</strong> info@losestenconjimenez.com</p>
+                <p><strong>Horario:</strong> Lunes a Sábado: 11am - 10pm / Domingo: 11am - 6pm</p>
+                
+                <h3 style="margin-top: 2rem;">Síguenos</h3>
+                <p>Conéctate con nosotros en redes sociales para conocer nuestras promociones y novedades.</p>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Envíanos un Mensaje</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Teléfono:</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <a href="https://wa.me/573137477897" class="whatsapp-btn" target="_blank">💬</a>
+    
+    <footer>
+        <div class="footer-logo">Los Estén con Jiménez</div>
+        <div class="social-links">
+            <a href="#">📱</a>
+            <a href="#">📘</a>
+            <a href="#">📸</a>
+            <a href="#">🐦</a>
+        </div>
+        <p class="copyright">© 2023 Los Estén con Jiménez. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        // JavaScript para el menú móvil
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('active');
+        });
+        
+        // JavaScript para el carrito de compras
+        let cartCount = 0;
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartCountElement = document.querySelector('.cart-count');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                cartCount++;
+                cartCountElement.textContent = cartCount;
+                
+                // Animación
+                cartCountElement.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    cartCountElement.style.transform = 'scale(1)';
+                }, 300);
+            });
+        });
+        
+        // Smooth scrolling para los enlaces del menú
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Cerrar menú móvil si está abierto
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.menu').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
+
+## Características del sitio web:
+
+1. **Diseño responsive** que se adapta a móviles, tablets y desktop
+2. **Menú de navegación** con efecto sticky y versión móvil
+3. **Sección "Nosotros"** con imagen y texto
+4. **Menú de productos** con:
+   - Imágenes atractivas
+   - Precios y descuentos
+   - Botón de añadir al carrito
+   - Efectos hover
+
+5. **Sección de servicios** con iconos
+6. **Área de descuentos** con banner llamativo
+7. **Sección de contacto** con:
+   - Información de la empresa
+   - Formulario de contacto
+   - Enlace directo a WhatsApp
+
+8. **Carrito de compras** funcional con contador
+9. **Botón flotante de WhatsApp** que enlaza directamente al número 313 747 7897
+10. **Efectos visuales** en todas las secciones (hover, transiciones)
+11. **Footer** con información de copyright y redes sociales
+
